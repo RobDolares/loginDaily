@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Login Portal</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <h1>Login</h1>
+      <ul class="error">
+        {{#errors}}
+            <li>{{msg}}</li>
+        {{/errors}}
+      </ul>
+
+
+    <form action="/login" method="post">
+      <div><input type="text" name="username" value="{{credentials.username}}" placeholder="username" /></div>
+      <div><input type="password" name="password" value="{{credentials.password}}" placeholder="password" /></div>
+      <button>Login</button>
+    </form>
+
+    <h2>Or Sign Up!</h2>
+
+    <div class="signupContainer">
+      <form class="" action="/signup" method="post">
+        <div><input type="text" name="username" value="" placeholder="Enter username"></div>
+        <div><input type="text" name="password" value="" placeholder="Enter password"></div>
+        <button>Signup</button>
+      </form>
+    </div>
+
+  </body>
+</html>
