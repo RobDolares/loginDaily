@@ -7,18 +7,18 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
-    <h1>Welcome to the Site!</h1>
+    <h1>Welcome</h1>
     <a href="/login">Login</a>
+    <p>test</p>
 
-    <ol>
-      {{#foods}}
-        <!-- this goes to a particular food by its index in the list of foods -->
-        <li><a href="/food/{{@index}}">
-          {{name}}
-        </a></li>
-      {{/foods}}
-    </ol>
 
-  
+    <h2>Welcome Back</h2>
+    {{#userdata}}
+
+    {{/userdata}}
+
+
+
+
   </body>
 </html>

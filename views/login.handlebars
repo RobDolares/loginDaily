@@ -15,8 +15,8 @@
 
 
     <form action="/login" method="post">
-      <div><input type="text" name="username" value="{{credentials.username}}" placeholder="username" /></div>
-      <div><input type="password" name="password" value="{{credentials.password}}" placeholder="password" /></div>
+      <div><input type="text" name="username" value="{{credInfo.username}}" placeholder="username" /></div>
+      <div><input type="password" name="password" value="{{credInfo.password}}" placeholder="password" /></div>
       <button>Login</button>
     </form>
 
@@ -24,8 +24,8 @@
 
     <div class="signupContainer">
       <form class="" action="/signup" method="post">
-        <div><input type="text" name="username" value="" placeholder="Enter username"></div>
-        <div><input type="text" name="password" value="" placeholder="Enter password"></div>
+        <div><input type="text" name="username" value="{{credInfo.username}}" placeholder="Enter username"></div>
+        <div><input type="text" name="password" value="{{credInfo.password}}" placeholder="Enter password"></div>
         <button>Signup</button>
       </form>
     </div>
