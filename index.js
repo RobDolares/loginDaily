@@ -54,20 +54,21 @@ app.use((req, res, next) => {
 
 app.get('/', (req, res) => {
   if (req.session.userdata === undefined ||
-    req.session.userdata.length == 0) {
+    req.session.userdata.length == 0)  {
     res.redirect('/login');
   } else {
     res.render('home', {
       userdata: req.session.userdata
+
     });
   };
 });
 
 
 // configure the webroot
-app.get('/', function(req, res) {
-  res.render('home');
-});
+// app.get('/', function(req, res) {
+//   res.render('home');
+// });
 
 
 app.get('/login', function(req, res) {
@@ -96,10 +97,10 @@ app.post('/login', function(req, res) {
 
         for (var i = 0; i < data.length; i++) {
           if (data[i].password === credInfo.password && data[i].username === credInfo.username) {
-
-            res.render('home');
+            req.session.userdata.push(data[i]);
+            res.redirect('/')
           } else {
-            res.redirect('/');
+            res.redirect('/login');
           }
         }
       }
@@ -128,29 +129,43 @@ app.post('/login', function(req, res) {
 
 
 
-    //For new users
+  // For new users
+  app.get('/signup', function(req, res) {
+    res.render('signup');
+  });
 
-    //
-    // app.post('/signup', function(req, res) {
-    //   // get the food item details from the posted body data
-    //   let userCred = req.body;
-    //
-    //   // validate the user's data
-    //   req.checkBody('username', 'Name is required').notEmpty();
-    //   req.checkBody('password', 'Password is required').notEmpty();
-    //
-    //   // get all errors from our validation that we just did as an array
-    //   let errors = req.validationErrors();
-    //
-    //   if (errors) {
-    //     console.log(errors);
-    //     res.render('login', { errors: errors, userCred: userCred });
-    //   } else {
-    //
-    //     req.session.userdata.push(userCred);
-    //     res.redirect('/');
-    //   }
-    // });
+  app.post('/signup', function(req, res) {
+
+      let credInfo = req.body;
+
+      req.checkBody('name', 'Name is required').notEmpty();
+      req.checkBody('age', 'Age is required').notEmpty();
+      req.checkBody('username', 'Username is required').notEmpty();
+      req.checkBody('password', 'Password is required').notEmpty();
+
+
+      let errors = req.validationErrors();
+
+      if (errors) {
+        // there were errors, report them
+        console.log(errors);
+
+        res.render('login', {
+          errors: errors,
+          credInfo: credInfo
+        });
+      } else {
+
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].password === credInfo.password && data[i].username === credInfo.username) {
+            req.session.userdata.push(data[i]);
+            res.redirect('/')
+          } else {
+            res.redirect('/login');
+          }
+        }
+      }
+    });
 
 
     // make express listen on port 3000

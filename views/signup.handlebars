@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h2>Sign Up!</h2>
+
+    <div class="signupContainer">
+
+      <!-- <ul class="error">
+        {{#errors}}
+            <li>{{msg}}</li>
+        {{/errors}}
+      </ul> -->
+
+      <form class="" action="/signup" method="post">
+
+        <div><input type="text" name="name" value="{{credInfo.name}}" placeholder="Enter full name"></div>
+        <div><input type="text" name="age" value="{{credInfo.age}}" placeholder="Enter your age"></div>
+        <div><input type="text" name="username" value="{{credInfo.username}}" placeholder="Enter username"></div>
+        <div><input type="text" name="password" value="{{credInfo.password}}" placeholder="Enter password"></div>
+
+        <button>Signup</button>
+      </form>
+    </div>
+  </body>
+</html>
