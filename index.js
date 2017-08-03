@@ -77,7 +77,6 @@ app.post('/login', function(req, res) {
       req.checkBody('password', 'Password is required').notEmpty();
 
       let errors = req.validationErrors();
-
       if (errors) {
         // there were errors, report them
         console.log(errors);
@@ -92,15 +91,13 @@ app.post('/login', function(req, res) {
           if (credInfo.password === data[i].password && credInfo.username === data[i].username) {
             req.session.userdata.push(data[i]);
             res.redirect('/');
-          } else {
-            res.redirect('/login');
           }
         }
       }
     });
 
 app.post('/logout', function(req,res){
-  req.session.userData = [];
+  req.session.userdata = undefined;
   res.redirect('/login')
 })
 
