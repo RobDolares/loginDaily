@@ -41,34 +41,26 @@ app.use(expressValidator());
 
 // this middleware creates a default session
 app.use((req, res, next) => {
-
   if (!req.session.userdata) {
-
     req.session.userdata = [];
   }
   console.log(req.session);
-
   next();
 });
 
 
 app.get('/', (req, res) => {
   if (req.session.userdata === undefined ||
-    req.session.userdata.length == 0)  {
+    req.session.userdata.length === 0)  {
     res.redirect('/login');
   } else {
     res.render('home', {
       userdata: req.session.userdata
-
     });
   };
 });
 
 
-// configure the webroot
-// app.get('/', function(req, res) {
-//   res.render('home');
-// });
 
 
 app.get('/login', function(req, res) {
@@ -79,6 +71,7 @@ app.get('/login', function(req, res) {
 app.post('/login', function(req, res) {
 
       let credInfo = req.body;
+      console.log(credInfo);
 
       req.checkBody('username', 'Name is required').notEmpty();
       req.checkBody('password', 'Password is required').notEmpty();
@@ -94,11 +87,11 @@ app.post('/login', function(req, res) {
           credInfo: credInfo
         });
       } else {
-
+        console.log(data);
         for (var i = 0; i < data.length; i++) {
-          if (data[i].password === credInfo.password && data[i].username === credInfo.username) {
+          if (credInfo.password === data[i].password && credInfo.username === data[i].username) {
             req.session.userdata.push(data[i]);
-            res.redirect('/')
+            res.redirect('/');
           } else {
             res.redirect('/login');
           }
@@ -106,30 +99,12 @@ app.post('/login', function(req, res) {
       }
     });
 
-    // show a particular login
-    // app.get('/', function(req, res) {
-    //   res.render('home', {
-    //     userCred: req.session.userdata[]
-    //   });
-    // });
 
 
 
 
 
-    // app.get('/', (req, res) => {
-    //   if (!req.session.user){
-    //     res.redirect('/login');
-    //   } else {
-    //     res.render('home')
-    //   }
-    // })
-
-
-
-
-
-  // For new users
+  // For new users to signup
   app.get('/signup', function(req, res) {
     res.render('signup');
   });
@@ -137,34 +112,8 @@ app.post('/login', function(req, res) {
   app.post('/signup', function(req, res) {
 
       let credInfo = req.body;
-
-      req.checkBody('name', 'Name is required').notEmpty();
-      req.checkBody('age', 'Age is required').notEmpty();
-      req.checkBody('username', 'Username is required').notEmpty();
-      req.checkBody('password', 'Password is required').notEmpty();
-
-
-      let errors = req.validationErrors();
-
-      if (errors) {
-        // there were errors, report them
-        console.log(errors);
-
-        res.render('login', {
-          errors: errors,
-          credInfo: credInfo
-        });
-      } else {
-
-        for (var i = 0; i < data.length; i++) {
-          if (data[i].password === credInfo.password && data[i].username === credInfo.username) {
-            req.session.userdata.push(data[i]);
-            res.redirect('/')
-          } else {
-            res.redirect('/login');
-          }
-        }
-      }
+      data.push(credInfo);
+      res.redirect('/login');
     });
 
 
